@@ -6,13 +6,13 @@ import bodyParser from 'body-parser';
 // Load .env
 config();
 
-import {publicPath} from './config';
+import {uploadsPath} from './config';
 
 const app = express();
 app.use(morgan('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
-app.use(express.static(publicPath));
+app.use(express.static(uploadsPath));
 
 app.use((req, res, next) => {
     res.header("Access-Control-Allow-Origin", "*");
@@ -26,10 +26,13 @@ app.use((req, res, next) => {
     next();
 });
 
+import {UsersRoutes} from './routes';
+
 app.get('/', (req, res) => {
     res.status(200).json({name: 'API'});
 });
 
+app.use('/users', UsersRoutes);
 
 app.use((req: Request, res: Response, next: NextFunction) => {
     const error = {

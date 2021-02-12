@@ -1,10 +1,9 @@
-const { DB_HOST, DB_CONNECTION, DB_USERNAME, DB_PASSWORD, DB_DATABASE } = process.env;
+import {Sequelize} from 'sequelize';
+const { DB_HOST, DB_USERNAME, DB_PASSWORD, DB_DATABASE } = process.env;
 
-const Sequelize = require('sequelize');
-const sequelize = new Sequelize(DB_DATABASE, DB_USERNAME, DB_PASSWORD, {
+const sequelize = new Sequelize(<string>DB_DATABASE, <string>DB_USERNAME, <string>DB_PASSWORD, {
     host: DB_HOST,
-    dialect: DB_CONNECTION,
-    operatorsAliases: false,
+    dialect: 'mysql',
     define: {
         timestamps: true
     },
