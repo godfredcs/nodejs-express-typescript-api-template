@@ -1,0 +1,36 @@
+{
+  "name": "nodejs-express-typescript-api-template",
+  "version": "1.0.0",
+  "description": "A nodejs express typescript api template.",
+  "main": "dist/app.js",
+  "repository": "https://github.com/godfredcs/nodejs-express-typescript-api-template",
+  "author": "Godfred Boateng Addai <addaiz.godfred@gmail.com>",
+  "license": "MIT",
+  "private": false,
+  "scripts": {
+    "start": "nodemon dist/app.js",
+    "watch": "tsc --watch"
+  },
+  "dependencies": {
+    "bcrypt": "^5.0.0",
+    "body-parser": "^1.19.0",
+    "dotenv-safe": "^8.2.0",
+    "express": "^4.17.1",
+    "http-status-codes": "^2.1.4",
+    "jsonwebtoken": "^8.5.1",
+    "multer": "^1.4.2",
+    "mysql2": "^2.2.5",
+    "sequelize": "^6.5.0",
+    "typescript": "^4.1.5",
+    "validatorjs": "^3.22.1"
+  },
+  "devDependencies": {
+    "@types/body-parser": "^1.19.0",
+    "@types/dotenv-safe": "^8.1.1",
+    "@types/express": "^4.17.11",
+    "@types/jsonwebtoken": "^8.5.0",
+    "@types/morgan": "^1.9.2",
+    "morgan": "^1.10.0",
+    "nodemon": "^2.0.7"
+  }
+}
