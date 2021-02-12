@@ -14,7 +14,7 @@ const app = express_1.default();
 app.use(morgan_1.default('dev'));
 app.use(body_parser_1.default.json());
 app.use(body_parser_1.default.urlencoded({ extended: false }));
-app.use(express_1.default.static(config_1.publicPath));
+app.use(express_1.default.static(config_1.uploadsPath));
 app.use((req, res, next) => {
     res.header("Access-Control-Allow-Origin", "*");
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization");
@@ -24,9 +24,11 @@ app.use((req, res, next) => {
     }
     next();
 });
+const routes_1 = require("./routes");
 app.get('/', (req, res) => {
     res.status(200).json({ name: 'API' });
 });
+app.use('/users', routes_1.UsersRoutes);
 app.use((req, res, next) => {
     const error = {
         status: 404,
