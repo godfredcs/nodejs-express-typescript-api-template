@@ -15,12 +15,12 @@ const sequelize = new sequelize_1.Sequelize(DB_DATABASE, DB_USERNAME, DB_PASSWOR
         idle: 10000
     }
 });
-sequelize
-    .authenticate()
-    .then(() => {
-    console.log('Connection has been established successfully.');
-})
-    .catch((error) => {
-    console.error('Unable to connect to the database: ', error);
-});
+// sequelize
+//     .authenticate()
+//     .then(() => {
+//         console.log('Connection has been established successfully.');
+//     })
+//     .catch((error: any) => {
+//         console.error('Unable to connect to the database: ', error);
+//     });
 exports.default = sequelize;

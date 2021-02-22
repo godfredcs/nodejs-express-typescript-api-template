@@ -1,11 +1,12 @@
 import morgan from 'morgan';
-import express, {Request, Response, NextFunction} from 'express';
 import {config} from 'dotenv-safe';
 import bodyParser from 'body-parser';
+import express, {Request, Response, NextFunction} from 'express';
 
 // Load .env
 config();
 
+import sequelize from './database';
 import {uploadsPath} from './config';
 
 const app = express();
@@ -52,4 +53,15 @@ app.use((error: any, req: Request, res: Response, next: NextFunction) => {
         });
 });
 
-app.listen(process.env.PORT);
+(async () => {
+    try {
+        const result = await sequelize.sync();
+
+        if (result) {
+            app.listen(process.env.PORT);
+            // console.log('this is the result from sequelize sync: ', result);
+        }
+    } catch (error) {
+        console.log('this is the error from trying to connect to db: ', error);
+    }
+})();

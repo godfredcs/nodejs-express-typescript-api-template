@@ -6,7 +6,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const database_1 = __importDefault(require("./../../database"));
 const sequelize_1 = require("sequelize");
 ;
-// export const
+;
 class User extends sequelize_1.Model {
 }
 User.init({
@@ -33,5 +33,6 @@ User.init({
     }
 }, {
     sequelize: database_1.default,
-    modelName: 'User',
+    modelName: 'user',
 });
+exports.default = User;

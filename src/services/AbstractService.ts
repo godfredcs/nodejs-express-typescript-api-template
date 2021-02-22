@@ -1,25 +1,30 @@
+import {Model, ModelDefined} from 'sequelize';
+import User from '../models/Users/User';
 export default abstract class AbstractService
 {
-    protected abstract model: any;
+    // // public model: User;
+    // static model: User;
 
-    public constructor()
-    {
+    // public constructor()
+    // {
 
-    }
+    // }
 
-    public all(params?: {})
-    {
-        return [
-            {
-                name: 'user name',
-            }
-        ];
-    }
+    // public static async all(params?: {})
+    // {
+    //     const result = await this.model.findAll();
 
-    public store(data: {}): {}
-    {
-        return {
-            name: 'user name',
-        };
-    }
+    //     return [
+    //         {
+    //             name: 'user name',
+    //         }
+    //     ];
+    // }
+
+    // public async store(data: {})
+    // {
+    //     return {
+    //         name: 'user name',
+    //     };
+    // }
 }
