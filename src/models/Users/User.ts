@@ -1,17 +1,31 @@
 import sequelize from './../../database';
-import { BuildOptions, DataTypes, Model, Sequelize } from "sequelize";
+import {
+    Model,
+    Optional,
+    DataTypes,
+} from 'sequelize';
 
 export interface UserAttributes {
-    id?: number;
-    name: string;
+    id: number;
+    firstname: string;
+    lastname: string;
     email: string;
-    createdAt?: Date;
-    updatedAt?: Date;
+    password: string;
+    token?: string;
 };
 
-// export const
+export interface UserCreationAttributes extends Optional<UserAttributes, 'id'> {};
 
-class User extends Model {}
+class User extends Model<UserAttributes, UserCreationAttributes> implements UserAttributes {
+    public id!: number;
+    public firstname!: string;
+    public lastname!: string;
+    public email!: string;
+    public password!: string;
+
+    public readonly createdAt!: Date;
+    public readonly updatedAt!: Date;
+}
 
 User.init({
     id: {
@@ -37,5 +51,7 @@ User.init({
     }
 }, {
     sequelize,
-    modelName: 'User',
+    modelName: 'user',
 });
+
+export default User;
