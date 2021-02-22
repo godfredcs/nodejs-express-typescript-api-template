@@ -1,6 +1,7 @@
 import {Request, Response} from 'express';
-import {StatusCodes} from 'http-status-codes';
+import {StatusCodes, getReasonPhrase} from 'http-status-codes';
 
+import {UserCreationAttributes} from './../../models/Users/User';
 import {UserService} from './../../services';
 
 export default {
@@ -10,11 +11,9 @@ export default {
      * @param {Request} req
      * @param {Response} res
      */
-    index(req: Request, res: Response) {
-        // Code
-        return res.status(StatusCodes.OK).json({
-            message: 'Got users successfully.'
-        });
+    async index(req: Request, res: Response) {
+        const users = await UserService.all(req.params);
+        return res.status(StatusCodes.OK).json(users);
     },
 
     /**
@@ -23,11 +22,23 @@ export default {
      * @param {Request} req
      * @param {Response} res
      */
-    store(req: Request, res: Response) {
-        // Code
-        return res.status(StatusCodes.CREATED).json({
-            message: 'Created user successfully.'
-        });
+    async store(req: Request, res: Response) {
+        const data: UserCreationAttributes = {
+            firstname: req.body.firstname,
+            lastname: req.body.lastname,
+            email: req.body.email,
+            password: req.body.password,
+        };
+
+        const user = await UserService.store(data);
+
+        if (!user) {
+            return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
+                error: getReasonPhrase(StatusCodes.INTERNAL_SERVER_ERROR)
+            });
+        }
+
+        return res.status(StatusCodes.CREATED).json(user);
     },
 
     /**
